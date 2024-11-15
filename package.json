@@ -3,11 +3,13 @@
     "@codemirror/theme-one-dark": "^6.1.2",
     "@types/jest": "^29.5.3",
     "@types/node": "^18.11.9",
+    "@types/object-inspect": "^1.13.0",
     "codemirror": "^6.0.1",
     "gdparse": "^1.0.2",
     "immutable": "^4.1.0",
     "node-fetch": "^3.3.2",
-    "type-fest": "^3.12.0"
+    "type-fest": "^3.12.0",
+    "zod": "^3.23.8"
   },
   "scripts": {
     "watch-all": "npm run dev --prefix desmoscript",
