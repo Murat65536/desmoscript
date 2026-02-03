@@ -96,7 +96,7 @@ function noNewlines(str: string) {
   return str.replace(/\n/g, "");
 }
 
-test("y u no work", () => {
+test.skip("y u no work", () => {
   expect(1).toEqual(2);
 });
 

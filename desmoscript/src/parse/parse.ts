@@ -152,8 +152,7 @@ export function parse(
           if (!token)
             throw errnode(
               endOfInputErr ??
-                `unexpected end of input: ${err}` ??
-                `unexpected end of input: expected '${str}'`,
+                (err ? `unexpected end of input: ${err}` : `unexpected end of input: expected '${str}'`),
               tokenStream.stringpos(),
               tokenStream.stringpos()
             );
@@ -169,10 +168,9 @@ export function parse(
           if (!token)
             throw errnode(
               endOfInputErr ??
-                `unexpected end of input: ${err}` ??
-                `unexpected end of input: expected one of ${strs
+                (err ? `unexpected end of input: ${err}` : `unexpected end of input: expected one of ${strs
                   .map((s) => `'${s}'`)
-                  .join(", ")}`,
+                  .join(", ")}`),
               tokenStream.stringpos(),
               tokenStream.stringpos()
             );
@@ -194,8 +192,7 @@ export function parse(
           if (!token) {
             throw errnode(
               endOfInputErr ??
-                `unexpected end of input: ${err}` ??
-                `unexpected end of input: expected a/an '${type}' token`,
+                (err ? `unexpected end of input: ${err}` : `unexpected end of input: expected a/an '${type}' token`),
               tokenStream.stringpos(),
               tokenStream.stringpos()
             );

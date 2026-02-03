@@ -4,7 +4,6 @@ export const makeChannel = (
   receiver: NodeJS.EventEmitter
 ) => ({
   send(msg: any) {
-    console.log(`Sent on channel ${channelName}`, msg);
     sender.send({
       channel: channelName,
       msg,
@@ -13,9 +12,7 @@ export const makeChannel = (
 
   onReceive(handler: (msg: any) => void) {
     const listener = ({ channel, msg }) => {
-      console.log("received message: ", channel, msg);
       if (channel !== channelName) return;
-      console.log(`Received on channel ${channelName}`, msg);
       handler(msg);
     };
     receiver.setMaxListeners(Infinity);

@@ -38,16 +38,11 @@ export async function attachLanguageServer(
     async provideDocumentSemanticTokens(document) {
       const tokensBuilder = new SemanticTokensBuilder(legend);
       const documentPath = document.uri.toString();
-      console.log("1");
       await desmoscriptCompiler.updateFile(documentPath, document.getText());
-
-      console.log("2");
 
       try {
         (await desmoscriptCompiler.highlightSyntax(documentPath)).forEach(
           ({ token, start, end, type }) => {
-            console.log("got toekn");
-
             const startpos = document.positionAt(start);
             const endpos = document.positionAt(end);
             if (startpos.line != endpos.line) return;
@@ -70,7 +65,6 @@ export async function attachLanguageServer(
 
       try {
         const builtTokens = tokensBuilder.build();
-        console.log("builtTokens made");
         return builtTokens;
       } catch (err) {
         vscode.window.showErrorMessage(
@@ -225,7 +219,7 @@ export async function attachLanguageServer(
             });
           });
         } catch (err) {
-          console.log("err during autocomplete", err);
+          // Autocomplete errors handled silently
         }
 
         return items;
@@ -331,7 +325,6 @@ export async function attachLanguageServer(
 
           const compile = async () => {
             const start = Date.now();
-            console.log("compile start");
             const compilerOutput = await desmoscriptCompiler.compile(filename, {
               unsavedFiles: new Map(),
               watchFiles: new Set(),
@@ -339,15 +332,12 @@ export async function attachLanguageServer(
                 annotateExpressionsWithEquivalentDesmoscript: false,
               },
             });
-            console.log("compile end");
             const end = Date.now();
-            console.log(`Compilation took ${end - start} milliseconds!`);
             if (compilerOutput.errors.length > 0) {
               vscode.window.showErrorMessage(
                 JSON.stringify(compilerOutput.errors)
               );
             }
-            console.log("complier output: ", compilerOutput);
             return compilerOutput;
           };
 

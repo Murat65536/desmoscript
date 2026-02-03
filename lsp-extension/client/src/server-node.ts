@@ -70,7 +70,6 @@ try {
     }
   );
 } catch (err) {
-  console.log("caught error!", err);
   process.send({
     type: "ERROR",
     err,
